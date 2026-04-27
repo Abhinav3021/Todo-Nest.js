@@ -10,7 +10,7 @@ services:
     depends_on:
       - db
     env_file:
-      - .env
+      - .env.docker
     command: pnpm run start:dev
 
   db:
