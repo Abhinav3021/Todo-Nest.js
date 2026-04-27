@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    container_name: nest-todo
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    env_file:
+      - .env
+    command: pnpm run start:dev
+
+  db:
+    image: postgres:16
+    container_name: nest-todo-db
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todos_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
