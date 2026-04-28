@@ -65,7 +65,7 @@ export class TodosController {
 
   @Post('drizzle')
   async drizzleCreate(@Body() dto: CreateTodoDto) {
-    return await this.drizzleService.db.insert(todos).values({title:dto.title,completed:dto.completed ?? false,}).returning();
+    return await this.drizzleService.db.insert(todos).values({title:dto.title, completed:dto.completed ?? false, updatedAt: new Date(),}).returning();
   }
 
   @Patch('drizzle/:id')
