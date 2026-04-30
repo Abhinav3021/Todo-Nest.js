@@ -1,12 +1,21 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodosModule } from './todos/todos.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { DrizzleModule } from './drizzle/drizzle.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
-  imports: [TodosModule, PrismaModule, DrizzleModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TodosModule,
+    PrismaModule,
+    DrizzleModule,
+    ChatModule],
   controllers: [AppController],
   providers: [AppService],
 })
